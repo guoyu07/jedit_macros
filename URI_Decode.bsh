@@ -1,0 +1,9 @@
+String code = textArea.getSelectedText();
+if ( code==null || code=="" ) {
+	code = Macros.input( view, "String to decode:" );
+}
+if ( code != null ) {
+	String decode = URLDecoder.decode( code );
+	newbuf = jEdit.newFile( view );
+	newbuf.insert( 0, decode );
+}

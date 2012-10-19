@@ -1,0 +1,14 @@
+SearchAndReplace mysearch = new SearchAndReplace();
+String tofind = textArea.getSelectedText();
+if ( tofind==null || tofind=="" ) {
+	tofind = Macros.input( view, "String to find:" );
+}
+if ( tofind != null ) {
+	mysearch.setSearchString(tofind);
+	mysearch.setAutoWrapAround(true);
+	mysearch.setReverseSearch(false);
+	mysearch.setIgnoreCase(false);
+	mysearch.setRegexp(false);
+	mysearch.setSearchFileSet(new CurrentBufferSet());
+	mysearch.find(view);
+}

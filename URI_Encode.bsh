@@ -1,0 +1,9 @@
+String code = textArea.getSelectedText();
+if ( code==null || code=="" ) {
+	code = Macros.input( view, "String to encode:" );
+}
+if ( code != null ) {
+	String encode = URLEncoder.encode( code );
+	newbuf = jEdit.newFile( view );
+	newbuf.insert( 0, encode );
+}

@@ -1,0 +1,91 @@
+////////////////////////////////////////////////////////////////////////////////
+String ref_c 	= "..\\..\\Documents\\manpage\\pages\\man";	// man{i}/{keyword}.{i}.html
+String ref_cpp 	= "..\\..\\Documents\\manpage\\stdcxx\\";	// {keyword}.html
+String ref_js 	= "..\\..\\Documents\\manpage\\jsref\\";	// {keyword}.html
+String ref_pl	= "..\\..\\Documents\\manpage\\perlfunc\\";	// {keyword}.html
+String ref_py	= "http://docs.python.org/search.html?q=";	// {keyword}
+
+////////////////////////////////////////////////////////////////////////////////
+Boolean fileExists( String file ) {
+	File fp = new File( file );
+	return fp.exists(); 
+}
+String openHelp( String htmlFile ) {
+	if ( fileExists(htmlFile) ) {
+		HelpViewer browser = new HelpViewer();
+		browser.gotoURL( htmlFile, false, 0 );
+	}
+    return htmlFile;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+String keyWord = textArea.getSelectedText();
+if ( (keyWord == null) || (keyWord.length() == 0) ) {
+	textArea.selectWord();
+	keyWord = textArea.getSelectedText();
+}
+if ( (keyWord == null) || (keyWord.length() <= 1) ) {
+	keyWord = Macros.input( view, "reference to find:" );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+if ( (keyWord != null) && (keyWord.length() > 0) ) {
+	String htmlFile = "";
+	String editMode = buffer.getMode().toString();
+
+	////////////////////////////////////////////////////////////////////////////
+	// python reference
+	if ( editMode.equals("python") ) {
+		Url = ref_py + keyWord;
+		infoviewer.InfoViewerPlugin.openURL( view, Url );
+		return;
+	}	
+
+	////////////////////////////////////////////////////////////////////////////
+	// javascript reference
+	if ( editMode.equals("javascript") || editMode.equals("html") ) {
+		File refpath = new File( ref_js );
+		File[] files = refpath.listFiles();
+		for ( var i=0; i<files.length; ++i ) {
+			htmlFile = files[i].getPath();
+			if ( htmlFile.indexOf(keyWord+".html") != -1 ) {
+				openHelp( htmlFile );
+			}
+		}
+		return;
+	}	
+	
+	////////////////////////////////////////////////////////////////////////////
+	// perl doc functions
+	if ( editMode.equals("perl") ) {
+		htmlFile = ref_pl + keyWord + ".html";
+		if ( fileExists(htmlFile) ) {
+			openHelp( htmlFile );
+			return;
+		}
+		return;
+	}		
+
+	////////////////////////////////////////////////////////////////////////////
+	// apache stdcxx reference
+	if ( editMode.equals("c++") ) {
+		String cppWord = keyWord.replaceAll( "_", "-" );
+		htmlFile = ref_cpp + cppWord + ".html";
+		if ( fileExists(htmlFile) ) {
+			openHelp( htmlFile );
+			return;
+		}
+	}
+	
+	////////////////////////////////////////////////////////////////////////////
+	// linux man-pages
+	for ( var i=1; i<=8; ++i ) {
+		htmlFile = ref_c + i + "\\" + keyWord + "." + i + ".html";		
+		if ( fileExists(htmlFile) ) {
+			openHelp( htmlFile );
+			return;
+		}
+	}
+	
+	Macros.message( view, keyWord + " reference not found" );
+}
