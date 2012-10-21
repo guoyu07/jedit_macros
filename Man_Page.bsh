@@ -1,8 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 String ref_c 	= "..\\..\\Documents\\manpage\\pages\\man";	// man{i}/{keyword}.{i}.html
+// or http://man7.org/linux/man-pages/man{i}/{keyword}.{i}.html
 String ref_cpp 	= "..\\..\\Documents\\manpage\\stdcxx\\";	// {keyword}.html
-String ref_js 	= "..\\..\\Documents\\manpage\\jsref\\";	// {keyword}.html
+// or http://stdcxx.apache.org/doc/stdlibref/{keyword}.html
 String ref_pl	= "..\\..\\Documents\\manpage\\perlfunc\\";	// {keyword}.html
+// or http://perldoc.perl.org/functions/{keyword}.html
+String ref_js 	= "..\\..\\Documents\\manpage\\jsref\\";	// {keyword}.html
 String ref_py	= "http://docs.python.org/search.html?q=";	// {keyword}
 
 ////////////////////////////////////////////////////////////////////////////////
