@@ -5,3 +5,4 @@ Goto_Buffer.bsh		focus to current buffer
 Man_Page.bsh		search current focused function document by file type, support c/c++, perl, python, javascript, linux api
 URI_Decode.bsh		uri encode current selection
 URI_Encode.bsh		uri decode current selection
+Paste_New.bsh		create new buffer and paste clipboard
