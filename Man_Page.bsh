@@ -1,11 +1,17 @@
 ////////////////////////////////////////////////////////////////////////////////
-String ref_c 	= "..\\..\\Documents\\manpage\\pages\\man";	// man{i}/{keyword}.{i}.html
+// base path:	/Applications/Develop/jEdit.app/Contents/Resources/Java/doc
+String base		= "../../../../../../..";
+
+String ref_c 	= base+"/Users/pi1ot/Documents/TechDocs/manpage/pages/man";	// man{i}/{keyword}.{i}.html
 // or http://man7.org/linux/man-pages/man{i}/{keyword}.{i}.html
-String ref_cpp 	= "..\\..\\Documents\\manpage\\stdcxx\\";	// {keyword}.html
+
+String ref_cpp 	= base+"/Users/pi1ot/Documents/TechDocs/manpage/stdcxx/";	// {keyword}.html
 // or http://stdcxx.apache.org/doc/stdlibref/{keyword}.html
-String ref_pl	= "..\\..\\Documents\\manpage\\perlfunc\\";	// {keyword}.html
+
+String ref_pl	= base+"/Users/pi1ot/Documents/TechDocs/manpage/perlfunc/";	// {keyword}.html
 // or http://perldoc.perl.org/functions/{keyword}.html
-String ref_js 	= "..\\..\\Documents\\manpage\\jsref\\";	// {keyword}.html
+
+String ref_js 	= base+"/Users/pi1ot/Documents/TechDocs/manpage/jsref/";	// {keyword}.html
 String ref_py	= "http://docs.python.org/search.html?q=";	// {keyword}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -33,6 +39,8 @@ if ( (keyWord == null) || (keyWord.length() <= 1) ) {
 
 ////////////////////////////////////////////////////////////////////////////////
 if ( (keyWord != null) && (keyWord.length() > 0) ) {
+	openHelp( "http://www.baidu.com" );
+	
 	String htmlFile = "";
 	String editMode = buffer.getMode().toString();
 
@@ -83,7 +91,7 @@ if ( (keyWord != null) && (keyWord.length() > 0) ) {
 	////////////////////////////////////////////////////////////////////////////
 	// linux man-pages
 	for ( var i=1; i<=8; ++i ) {
-		htmlFile = ref_c + i + "\\" + keyWord + "." + i + ".html";		
+		htmlFile = ref_c + i + "/" + keyWord + "." + i + ".html";
 		if ( fileExists(htmlFile) ) {
 			openHelp( htmlFile );
 			return;

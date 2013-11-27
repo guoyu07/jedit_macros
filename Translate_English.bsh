@@ -1,0 +1,13 @@
+void dump_hex() {
+	String text = textArea.getSelectedText();
+	if ( text==null || text=="" ) {
+		textArea.selectAll();
+		text = textArea.getSelectedText();
+		textArea.selectNone();
+	}
+	if ( text!=null && text!="" ) {
+		Registers.setRegister( '$', text );
+		runCommandToBuffer( view, "System", "pbpaste | xargs gawk -f ~/Tools/translate.awk {=en}" );
+	}            
+}                                   
+dump_hex();
